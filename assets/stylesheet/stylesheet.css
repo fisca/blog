@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 ก.พ. 2557, 14:54:47
+    Author     : Research_Com
+*/
+
+@media (min-width: 1200px)  {
+    .container {
+        width: 980px;
+    }
+} /*  END @media (min-width: 1200px) */
+
