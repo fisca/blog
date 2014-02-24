@@ -2,50 +2,58 @@
 
 class Researcher extends CI_Controller {
 
-    public function login() {
+    public function __construct() {
+        parent::__construct();
 
         // ======== Library ========//
         $this->load->library('session');
-        $data['session_data'] = array(
-            'session_id' => $this->session->userdata('session_id'),
-            'ip_address' => $this->session->userdata('ip_address'),
-            'user_agent' => $this->session->userdata('user_agent'),
-            'last_activity' => $this->session->userdata('last_activity')
-        );
-
-
 
         // ======== Helper ======== //
         $this->load->helper('url');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->helper('captcha');
-         
-        
-        // ======== Model ======== //
-        $this->load->database();
+
+        // ======== Model ======== //        
         $this->load->model('Researchermodel');
-        $this->Researchermodel->get_login();
-        $data['show'] = $this->Researchermodel->show;
-        $data['username'] = $this->Researchermodel->username;
-        $data['password'] = $this->Researchermodel->password;
 
+        // ==== User Session Data ==== //
+        $data['session_data'] = array(
+            'session_id' => $this->session->userdata('session_id'),
+            'ip_address' => $this->session->userdata('ip_address'),
+            'user_agent' => $this->session->userdata('user_agent'),
+            'last_activity' => $this->session->userdata('last_activity')
+        );
+    }
 
-        // ======== HTML Componets ======== //
-        // --- Template ----//
-        // Title
-        $data['title'] = 'Login';
+// END __constructor()
 
-        // Stylesheet
+    public function index() {
+        if (isset($_SESSION['username']) && $_SESSION['password']) {
+            redirect('researcher/home', 'location');
+        } else {
+            redirect('researcher/login', 'location');
+        }
+    }
+
+    public function login() {
+
+        // ======== HTML Componets ======== // 
+        // ---- Stylesheet ---- //
         $data['bootstrap_css'] = link_tag('assets/bootstrap/css/bootstrap.min.css', 'stylesheet', 'text/css');
         $data['stylesheet'] = link_tag('assets/stylesheet/stylesheet.css', 'stylesheet', 'text/css');
 
-        // JavaScript
+        // ---- JavaScript ---- //
         $data['bootstrap_js'] = base_url('assets/bootstrap/js/bootstrap.min.js');
 
 
-        // --- Form --- //
+        // ---- Meta ---- //
+        // ---- Title ---- //
+        $data['title'] = 'Login';
 
+
+
+        // ---- Form ---- //
         $input = array(
             'username' => array(
                 'class' => 'form-control',
@@ -74,13 +82,47 @@ class Researcher extends CI_Controller {
         );
 
 
-
         // --- Pages loding ---- //
         $this->load->view('theme/mytheme/template/header', $data);
-
         $this->load->view('researcher/login', $data);
+        $this->load->view('theme/mytheme/template/footer', $data);
+    }
 
+// Login()
+
+    public function Home() {
+
+        // ==== Login Information from Model ==== //
+        $this->Researchermodel->get_login();
+
+        if (!empty($this->Researchermodel->username) && !empty($this->Researchermodel->password)) {
+            $session_login = array(
+                'username' => $this->Researchermodel->username,
+                'password' => $this->Researchermodel->password
+            );
+            $_SESSION['username'] = $session_login['username'];
+            $_SESSION['password'] = $session_login['password'];
+
+            $data['session_login'] = $session_login;
+        } else {
+            redirect('researcher/login', 'location');
+        }
+
+        // ======== HTML Componets ======== // 
+        // ---- Stylesheet ---- //
+        $data['bootstrap_css'] = link_tag('assets/bootstrap/css/bootstrap.min.css', 'stylesheet', 'text/css');
+        $data['stylesheet'] = link_tag('assets/stylesheet/stylesheet.css', 'stylesheet', 'text/css');
+
+        // ---- JavaScript ---- //
+        $data['bootstrap_js'] = base_url('assets/bootstrap/js/bootstrap.min.js');
+        $data['title'] = 'Home';
+
+
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('researcher/home', $data);
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
 }
+
+// END Researcher
