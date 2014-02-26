@@ -40,9 +40,8 @@ class Login_model extends CI_Model {
                 $row = $query->row();
                 $data = array(
                     'user_id' => $row->user_id,
-                    //'fname' => $row->fname,
-                    //'lname' => $row->lname,
                     'username' => $row->username,
+                    'researcher_key' => $row->researcher_key,
                     'validated' => true
                 );
                 $this->session->set_userdata($data);

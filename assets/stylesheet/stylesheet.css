@@ -1,12 +1,10 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : 21 ก.พ. 2557, 14:54:47
     Author     : Research_Com
 */
+body{
+    font-size: 13px;
+}
 
 @media (min-width: 1200px)  {
     .container {
@@ -14,3 +12,6 @@ and open the template in the editor.
     }
 } /*  END @media (min-width: 1200px) */
 
+.form-horizontal .control-label {
+    // text-align: left;
+}
