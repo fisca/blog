@@ -36,15 +36,36 @@ class Login_model extends CI_Model {
             $query = $this->db->get('ci_user');
             // Let's check if there are any results        
             if ($query->num_rows == 1) {
+
+                $row = $query->row();
+
+                $data_update = array(
+                    'recent_login' => date("Y-m-d H:i:s"),
+                    'last_time_login' => $row->recent_login
+                );
+                $where = "user_id = $row->user_id";
+                $str = $this->db->update_string('ci_user', $data_update, $where);
+                $this->db->query($str);
+
                 // If there is a user, then create session data
+                $this->db->where('username', $username);
+                $this->db->where('password', sha1($password));
+                $query = $this->db->get('ci_user');
                 $row = $query->row();
                 $data = array(
                     'user_id' => $row->user_id,
                     'username' => $row->username,
+                    'recent_login' => $row->recent_login,
+                    'last_time_login' => $row->last_time_login,
                     'researcher_key' => $row->researcher_key,
+                    'level' => $row->level,
                     'validated' => true
                 );
+
                 $this->session->set_userdata($data);
+
+
+
                 return true;
             }
             // If the previous process did not validate

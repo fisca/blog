@@ -4,12 +4,19 @@
 
         <div class="col-md-12" style="background-color: #e7e3b1;">
 
-            <h2 class="text-center header-type">Researcher List</h2>
-            <h3><?php echo $welcome; ?></h3>
+            <div class="row">
+                <div class="col-md-3" style="border: solid 1px black;">ค้นหานักวิจัย</div>
+                <div class="col-md-4" style="border: solid 1px black;">พิมพ์ประวัติส่วนตัว</div>
+                <div class="col-md-5" style="border: solid 1px black;">
+                    <?php echo $welcome; ?>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+            <h3>รายชื่อนักวิจัย</h3>
             <?php
             $i = 1;
             foreach ($query as $row) {
-                echo '<a href="' . $row->researcher_id . '">' . $i. '. ' . $row->firstname_th . ' ' . $row->lastname_th . '</a>';
+                echo '<a href="' .  base_url() . 'index.php/profile/id/' . $row->researcher_id . '">' . $i. '. ' . $row->firstname_th . ' ' . $row->lastname_th . '</a>';
             }
             ?>
 
