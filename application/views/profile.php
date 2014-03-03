@@ -49,6 +49,10 @@
             </table>
 
             <p>&nbsp;</p>
+            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit">
+                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                <button type="submit" class="btn btn-default">แก้ไข</button>
+            </form>
         </div>
 
     </div>

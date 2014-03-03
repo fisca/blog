@@ -92,4 +92,28 @@ class Profile extends CI_Controller {
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
+    public function edit() {
+        $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
+        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_id)) :
+
+            $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
+            $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
+
+            $this->load->model('profile_model');
+            $this->data['query'] = $this->profile_model->get_profile($edit_id);
+
+            $this->data['welcome'] = '<h4>ยินดีต้อนรับ</h4> คุณ ' . $this->session->userdata('username') . $user_welcome;
+
+            $data = $this->data;
+
+            $this->load->view('theme/mytheme/template/header', $data);
+            
+                    
+            $this->load->view('edit_profile', $data);
+            $this->load->view('theme/mytheme/template/footer', $data);
+        else :
+            redirect(base_url() . 'index.php/profile');
+        endif;
+    }
+
 }
