@@ -1,6 +1,6 @@
 <?php
 
-class Profile extends CI_Controller {
+class Education extends CI_Controller {
 
     public $data = array();
 
@@ -20,7 +20,7 @@ class Profile extends CI_Controller {
         $this->load->helper('captcha');
 
         // ======== Title ========
-        $this->data['title'] = 'Profile';
+        $this->data['title'] = 'Education';
 
         $this->check_isvalidated();
     }
@@ -33,18 +33,20 @@ class Profile extends CI_Controller {
 
         $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
         $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
-
+        
         $this->load->model('profile_model');
+        $this->load->model('education_model');
 
         if ($this->session->userdata('level') == 10) {
 
             $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
 
-            $this->data['query'] = $this->profile_model->get_list();
+            $this->data['query'] = $this->education_model->get_list();
 
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
             $this->load->view('researcher_list', $data);
+            
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
             foreach ($user_data as $row) :
@@ -54,10 +56,10 @@ class Profile extends CI_Controller {
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
 
-            $this->data['query'] = $this->profile_model->get_profile($this->session->userdata('researcher_key'));
+            $this->data['query'] = $this->education_model->get_education($this->session->userdata('researcher_key'));
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('profile', $data);
+            $this->load->view('education', $data);
         }
         $this->load->view('theme/mytheme/template/footer', $data);
     }

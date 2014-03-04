@@ -1,6 +1,6 @@
 <?php
 
-class Profile_model extends CI_Model {
+class Education_model extends CI_Model {
 
     public $data;
 
@@ -8,9 +8,11 @@ class Profile_model extends CI_Model {
         parent::__construct();
     }
 
-    public function get_profile($researcher_id) {
-        $this->db->where('researcher_id', $researcher_id);
-        $query = $this->db->get('ci_profile');
+    public function get_education($researcher_id) {
+        $sql = "SELECT * FROM ci_education WHERE researcher_id = '$researcher_id' ORDER BY grad_year DESC;";
+        // $this->db->where('researcher_id', $researcher_id);
+        // $query = $this->db->get('ci_education');
+        $query = $this->db->query($sql);
         return $query->result();
     }
 

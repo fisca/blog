@@ -2,14 +2,13 @@
     <div class="row">
 
 
-        <div class="col-md-12" style="background-color: #e7e3b1;">
+        <div class="col-md-12">
 
             <div class="row">
                 <div class="col-md-4" style="border: solid 1px black;">ค้นหานักวิจัย</div>
                 <div class="col-md-4" style="border: solid 1px black;">พิมพ์ประวัติส่วนตัว</div>
                 <div class="col-md-4" style="border: solid 1px black;">
                     <?php echo $welcome; ?>
-                    <p>&nbsp;</p>
                 </div>
             </div>
 
@@ -49,7 +48,7 @@
             </table>
 
             <p>&nbsp;</p>
-            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit">
+            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_profile">
                 <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
                 <button type="submit" class="btn btn-default">แก้ไข</button>
             </form>
