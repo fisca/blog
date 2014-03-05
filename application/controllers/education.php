@@ -33,7 +33,7 @@ class Education extends CI_Controller {
 
         $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
         $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
-        
+
         $this->load->model('profile_model');
         $this->load->model('education_model');
 
@@ -46,7 +46,6 @@ class Education extends CI_Controller {
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
             $this->load->view('researcher_list', $data);
-            
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
             foreach ($user_data as $row) :
@@ -94,9 +93,16 @@ class Education extends CI_Controller {
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
-    public function edit_profile() {
-        $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
-        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_id)) :
+    public function edit_education() {
+        $edit_id = $this->security->xss_clean($this->input->post('education_id'));
+        $this->load->model('education_model');
+        $education_data = $this->education_model->get_edit_education($edit_id);
+        
+        foreach ($education_data as $row) :
+            $researcher_id = $row->researcher_id;
+        endforeach;        
+        
+        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $researcher_id)) :
             $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
             $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
             $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
@@ -115,17 +121,18 @@ class Education extends CI_Controller {
                 $this->data['welcome'] .= $user_welcome0 . $user_welcome;
             }
 
-            $this->data['query'] = $this->profile_model->get_profile($edit_id);
+            $this->load->model('education_model');
+            $this->data['query'] = $this->education_model->get_edit_education($edit_id);
 
-            $this->data['title'] = "แก้ไข Profile";
+            $this->data['title'] = "แก้ไข Education";
 
             $data = $this->data;
 
             $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('edit_profile', $data);
+            $this->load->view('edit_education', $data);
             $this->load->view('theme/mytheme/template/footer', $data);
         else :
-            redirect('profile');
+            redirect('education');
         endif;
     }
 

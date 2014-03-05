@@ -10,8 +10,12 @@ class Education_model extends CI_Model {
 
     public function get_education($researcher_id) {
         $sql = "SELECT * FROM ci_education WHERE researcher_id = '$researcher_id' ORDER BY grad_year DESC;";
-        // $this->db->where('researcher_id', $researcher_id);
-        // $query = $this->db->get('ci_education');
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+    
+    public function get_edit_education($education_id) {
+        $sql = "SELECT * FROM ci_education WHERE education_id = '$education_id';";
         $query = $this->db->query($sql);
         return $query->result();
     }

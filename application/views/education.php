@@ -20,7 +20,7 @@
             ?>
             <table class="table table-bordered">
                 <tr>
-                    <th>ลำดับ</th><th>ปีที่จบ</th><th>ระดับการศึกษา</th><th>สาขา (major)</th><th>แก้ไข</th>
+                    <th>ลำดับ</th><th>ปีที่จบ</th><th>ระดับการศึกษา (degree)</th><th>สาขา (major)</th><th>แก้ไข</th>
                 </tr>
 
                 <?php
@@ -30,11 +30,11 @@
                     <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row->grad_year; ?></td>
-                        <td><?php echo $row->degree; ?></td>
+                        <td><?php echo ucfirst($row->degree) . "'s degree"; ?></td>
                         <td><?php echo $row->major; ?></td>
                         <td>
-                            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_profile">
-                                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/education/edit_education">
+                                <input type="hidden" name="education_id" value="<?php echo $row->education_id; ?>">
                                 <button type="submit" class="btn btn-default">แก้ไข</button>
                             </form>
                         </td>
