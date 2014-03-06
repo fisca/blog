@@ -137,9 +137,9 @@ class Education extends CI_Controller {
     }
 
     public function edit_process() {
-        $this->load->model('profile_model');
-        $this->profile_model->update_profile();
-        redirect('profile');
+        $this->load->model('education_model');
+        $this->education_model->update_education();
+        redirect('education');
     }
 
 }

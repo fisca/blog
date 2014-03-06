@@ -1,32 +1,22 @@
 <div class="container">
     <div class="row">
-
-
         <div class="col-md-12">
-
             <div class="row">
-                <div class="col-md-4" style="border: solid 1px black;">ค้นหานักวิจัย</div>
-                <div class="col-md-4" style="border: solid 1px black;">พิมพ์ประวัติส่วนตัว</div>
-                <div class="col-md-4" style="border: solid 1px black;">
-                    <?php echo $welcome; ?>                    
+                <div class="col-xs-12 col-sm-4 col-md-4" style="border: 1px solid  #ccc;"><?php echo $welcome; ?></div>                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h2 style="text-align: center;">Edit Profile</h2>
+                    <h4 style="text-align: center; color: #89919c;">(แก้ไขข้อมูลประวัติส่วนตัว)</h4>
                 </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">&nbsp;</div>
             </div>
 
-            <h3 style="text-align: center;">แก้ไข ข้อมูลประวัติส่วนตัว</h3>
-            <?php
-            if (!$query) :
-                echo '<p style="color: red;"><strong>ขออภัย ไม่พบข้อมูล</strong></p>';
-            endif;
-            ?>
             <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_process">
                 <table class="table">
                     <?php foreach ($query as $row) : ?>                    
                         <tr><td><strong>คำนำหน้าชื่อ</strong></td>
                             <td>
                                 <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
-                                <div class="form-group">
-                                    <input type="text" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>">
-                                </div>                                
+                                <input type="text" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>">
                             </td>
                         </tr>
                         <tr><td><strong>ชื่อ</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_th" required value="<?php echo $row->firstname_th; ?>"></td></tr>
@@ -59,22 +49,22 @@
                         <tr><td><strong>โทรศัพท์มือถือ</strong></td><td><input type="text" name="mobile_phone" value="<?php echo $row->mobile_phone; ?>"></td></tr>
                         <tr><td><strong>Email</strong><span style="color: red;">**</span></td>
                             <td>
-                                <input style="width: 100%;" type="email" name="email" required multiple value="<?php echo $row->email; ?>">
-                                <br><span class="help-block">สามารถกรอกหลาย email ได้ โดยใช้เครื่องหมาย comma คั่น</span>
-                            </td></tr>
+                                <input style="width: 100%;" type="email" name="email" required multiple value="<?php echo $row->email; ?>">                                
+                            </td>
+                        </tr>
                         <tr><td><strong>Website</strong></td><td><input style="width: 100%;" type="text" name="website" value="<?php echo $row->website; ?>"></td></tr>
 
                     <?php endforeach; ?>
+                    <tr><td>&nbsp;</td><td><button type="submit" class="btn btn-default">Submit</button> &nbsp;<a href="<?php echo base_url() . "index.php/profile/id/" . $row->researcher_id; ?>">Cancel</a></td></tr>
                 </table>
-                <p>&nbsp;</p>
-                <button type="submit" class="btn btn-default">Submit</button> &nbsp;<a href="<?php echo base_url() . "index.php/profile/id/" . $row->researcher_id; ?>">Cancel</a>
-                <p>&nbsp;</p>
             </form>
             <script>
                 $(function() {
                     $("#title_th").focus();
                 });
             </script>
+
+            <p><strong>หมายเหตุ</strong>&nbsp; Email กรอกหลายอันได้โดยใช้เคริ่องหมาย comma (,) คั่น เช่น email1@sample.com, email2@sample.com เป็นต้น</p>
 
         </div>
 

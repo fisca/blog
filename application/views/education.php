@@ -1,18 +1,15 @@
 <div class="container">
     <div class="row">
-
-
+        
         <div class="col-md-12">
-
             <div class="row">
-                <div class="col-md-4" style="border: solid 1px black;">ค้นหานักวิจัย</div>
-                <div class="col-md-4" style="border: solid 1px black;">พิมพ์ประวัติส่วนตัว</div>
-                <div class="col-md-4" style="border: solid 1px black;">
-                    <?php echo $welcome; ?>
+                <div class="col-xs-12 col-sm-4 col-md-4" style="border: 1px solid  #ccc;"><?php echo $welcome; ?></div>                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h2 style="text-align: center;">Education</h2>
+                    <h4 style="text-align: center;">(ข้อมูลประวัติการศึกษา)</h4>
                 </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">&nbsp;</div>
             </div>
-
-            <h4>ข้อมูลประวัติการศึกษา</h4>
             <?php
             if (!$query) :
                 echo '<p style="color: red;"><strong>ขออภัย ไม่พบข้อมูล</strong></p>';
@@ -20,7 +17,7 @@
             ?>
             <table class="table table-bordered">
                 <tr>
-                    <th>ลำดับ</th><th>ปีที่จบ</th><th>ระดับการศึกษา (degree)</th><th>สาขา (major)</th><th>แก้ไข</th>
+                    <th style="text-align: center;">ลำดับ</th><th style="text-align: center;">ปีที่จบ</th><th style="text-align: center;">ระดับการศึกษา (degree)</th><th  style="text-align: center;">สาขา (major)</th><th  style="text-align: center;">แก้ไข</th>
                 </tr>
 
                 <?php
@@ -28,14 +25,14 @@
                 foreach ($query as $row) :
                     ?>
                     <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $row->grad_year; ?></td>
-                        <td><?php echo ucfirst($row->degree) . "'s degree"; ?></td>
-                        <td><?php echo $row->major; ?></td>
-                        <td>
+                        <td style="text-align: center;"><?php echo $i; ?></td>
+                        <td style="text-align: center;"><?php echo $row->grad_year; ?></td>
+                        <td style="text-align: center;"><?php echo ucfirst($row->degree) . "'s degree"; ?></td>
+                        <td style="text-align: center;"><?php echo $row->major; ?></td>
+                        <td style="text-align: center;">
                             <form role="form" method="post" action="<?php echo base_url(); ?>index.php/education/edit_education">
                                 <input type="hidden" name="education_id" value="<?php echo $row->education_id; ?>">
-                                <button type="submit" class="btn btn-default">แก้ไข</button>
+                                <button type="submit" class="btn btn-default">Edit</button>
                             </form>
                         </td>
                     </tr>

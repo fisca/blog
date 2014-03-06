@@ -1,18 +1,13 @@
 <div class="container">
-    <div class="row">
-
-
-        <div class="col-md-12">
-
+    <div class="row"><div class="col-md-12">
             <div class="row">
-                <div class="col-md-4" style="border: solid 1px black;">ค้นหานักวิจัย</div>
-                <div class="col-md-4" style="border: solid 1px black;">พิมพ์ประวัติส่วนตัว</div>
-                <div class="col-md-4" style="border: solid 1px black;">
-                    <?php echo $welcome; ?>
+                <div class="col-xs-12 col-sm-4 col-md-4" style="border: 1px solid  #ccc;"><?php echo $welcome; ?></div>                
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h2 style="text-align: center;">Profile</h2>
+                    <h4 style="text-align: center;">(ข้อมูลประวัติส่วนตัว)</h4>
                 </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">&nbsp;</div>
             </div>
-
-            <h4>ข้อมูลประวัติส่วนตัว</h4>
             <?php
             if (!$query) :
                 echo '<p style="color: red;"><strong>ขออภัย ไม่พบข้อมูล</strong></p>';
@@ -43,15 +38,17 @@
                     <tr><td><strong>โทรศัพท์มือถือ</strong></td><td><?php echo $row->mobile_phone; ?></td></tr>
                     <tr><td><strong>Email</strong></td><td><?php echo $row->email; ?></td></tr>
                     <tr><td><strong>Website</strong></td><td><?php echo $row->website; ?></td></tr>
-
                 <?php endforeach; ?>
+                <tr>
+                    <td>
+                        <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_profile">
+                            <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                            <button type="submit" class="btn btn-default">แก้ไข</button>
+                        </form>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
             </table>
-
-            <p>&nbsp;</p>
-            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_profile">
-                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
-                <button type="submit" class="btn btn-default">แก้ไข</button>
-            </form>
         </div>
 
     </div>

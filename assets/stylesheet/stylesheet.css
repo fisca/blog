@@ -3,7 +3,12 @@
     Author     : Research_Com
 */
 body{
-    font-size: 13px;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 12px;
+}
+
+select#expertise option[disabled]{
+    color: black;
 }
 
 @media (min-width: 1200px)  {

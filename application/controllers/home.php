@@ -24,13 +24,9 @@ class Home extends CI_Controller {
 
     public function index() {
         // If the user is validated, then this function will run
-        
-        $this->data['header_title'] = 'ระบบฐานข้อมูลนักวิจัย';
-        $this->data['msg'] = 'Congratulations, you are logged in.';
         $this->data['logout_tag'] = '<br /><a href="' . base_url() . 'index.php/home/do_logout">Logout</a>';
-
+        
         $data = $this->data;
-
         $this->load->view('theme/mytheme/template/header', $data);
         $this->load->view('home', $data);
         $this->load->view('theme/mytheme/template/footer', $data);
