@@ -26,7 +26,18 @@
         <![endif]-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+        
+        <?php echo link_tag('assets/jqueryui/jquery-ui-1.10.3/themes/base/jquery.ui.datepicker.css', 'stylesheet', 'text/css'); ?>
+        <script src="<?php echo base_url(); ?>assets/jqueryui/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+        <style>
+            #ui-datepicker-div{
+                background-color: #b2dba1;
+            }
+            .ui-icon.ui-icon-circle-triangle-e,
+            .ui-icon.ui-icon-circle-triangle-w {
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
@@ -51,14 +62,8 @@
                                 <li><a href="<?php echo base_url(); ?>index.php/profile">Profile</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/education">Education</a></li>
                                 <li><a href="#">Academic</a></li>
-                                <li><a href="#">Research</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/research">Research</a></li>
                             </ul>
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>

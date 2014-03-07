@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        
+
         <div class="col-md-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-4" style="border: 1px solid  #ccc;"><?php echo $welcome; ?></div>                
@@ -40,8 +40,12 @@
                     $i++;
                 endforeach;
                 ?>
-
             </table>
+
+            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/education/add_education">
+                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                <button type="submit" class="btn btn-default">เพิ่มข้อมูล</button>
+            </form>
 
             <p>&nbsp;</p>
 

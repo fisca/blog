@@ -52,7 +52,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>สถาบันการศึกษา<span style="color: red;">**</span></td><td><input name="institue" required value="<?php echo $row->institue; ?>"></td>
+                            <td>สถาบันการศึกษา<span style="color: red;">**</span></td><td><input style="width: 50%;" name="institute" required value="<?php echo $row->institute; ?>"></td>
                         </tr>
                         <tr>
                             <td>สาขาวิชา<span style="color: red;">**</span></td><td><input name="major" required value="<?php echo $row->major; ?>"></td>

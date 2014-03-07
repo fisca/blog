@@ -26,14 +26,14 @@ class Education_model extends CI_Model {
         $grad_year = $this->security->xss_clean($this->input->post('grad_year'));
         $degree = $this->security->xss_clean($this->input->post('degree'));
         $major = $this->security->xss_clean($this->input->post('major'));
-        $institue = $this->security->xss_clean($this->input->post('institue'));
+        $institute = $this->security->xss_clean($this->input->post('institute'));
         $country = $this->security->xss_clean($this->input->post('country'));
         $thesis_title = $this->security->xss_clean($this->input->post('thesis_title'));
         $keyword = $this->security->xss_clean($this->input->post('keyword'));
 
         $sql = "UPDATE ci_education 
             SET 
-                grad_year ='$grad_year', degree='$degree', major='$major', institue='$institue',
+                grad_year ='$grad_year', degree='$degree', major='$major', institute='$institute',
                 country='$country', thesis_title='$thesis_title', keyword='$keyword' 
             WHERE education_id = $education_id;";
         $this->db->query($sql);

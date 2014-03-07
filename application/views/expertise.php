@@ -55,7 +55,7 @@ $expertise = array(
         "Thermal properties of condensed matter",
         "Nonelectronic transport properties of condensed matter",
         "Quantum fluids and solids",
-        "Surfaces and interfaces; thin films and nanosystems (structure and nanoelectronic properties)"
+        "Surfaces and interfaces; thin films and nanosystems (structure and nonelectronic properties)"
     ),
     "Condensed Matter: Electronic structure, electrical, magnetic and optical properties" => array(
         "Electronic structure of bulk materials",
