@@ -1,6 +1,6 @@
 <?php
 
-class Research extends CI_Controller {
+class Employment extends CI_Controller {
 
     public $data = array();
 
@@ -20,27 +20,27 @@ class Research extends CI_Controller {
         $this->load->helper('captcha');
 
         // ======== Title ========
-        $this->data['title'] = 'Research data';
+        $this->data['title'] = 'Employment Position data';
 
         $this->check_isvalidated();
     }
 
     public function index() {
-        // If the user is validated, then this function will run        
+        // If the user is validated, then this function will run
+        $this->data['logout_tag'] = '<br /><a href="' . base_url() . 'index.php/home/do_logout">Logout</a>';
 
         $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
 
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . date("F j, Y g:i:s a." ,strtotime($this->session->userdata('recent_login')));
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . date("F j, Y g:i:s a." ,strtotime($this->session->userdata('last_time_login')));
+        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
+        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
 
         $this->load->model('profile_model');
-        $this->load->model('research_model');
 
         if ($this->session->userdata('level') == 10) {
 
             $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
 
-            $this->data['query'] = $this->education_model->get_list();
+            $this->data['query'] = $this->profile_model->get_list();
 
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
@@ -53,12 +53,12 @@ class Research extends CI_Controller {
             endforeach;
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
-
-            $this->data['query'] = $this->research_model->get_research($this->session->userdata('researcher_key'));
-            $this->data['query_expertise'] = $this->research_model->get_expertise($this->session->userdata('researcher_key'));
+            
+            $this->load->model('employment_model');
+            $this->data['query'] = $this->employment_model->get_employment($this->session->userdata('researcher_key'));
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('research', $data);
+            $this->load->view('employment', $data);
         }
         $this->load->view('theme/mytheme/template/footer', $data);
     }
@@ -93,16 +93,9 @@ class Research extends CI_Controller {
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
-    public function edit_research() {
+    public function edit_employment() {
         $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
-        $this->load->model('education_model');
-        $education_data = $this->education_model->get_edit_education($edit_id);
-        
-        foreach ($education_data as $row) :
-            $researcher_id = $row->researcher_id;
-        endforeach;        
-        
-        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $researcher_id)) :
+        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_id)) :
             $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
             $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
             $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
@@ -121,25 +114,25 @@ class Research extends CI_Controller {
                 $this->data['welcome'] .= $user_welcome0 . $user_welcome;
             }
 
-            $this->load->model('education_model');
-            $this->data['query'] = $this->education_model->get_edit_education($edit_id);
+            $this->load->model('employment_model');
+            $this->data['query'] = $this->employment_model->get_employment($edit_id);
 
-            $this->data['title'] = "Edit Research Data";
+            $this->data['title'] = "Edit Employment";
 
             $data = $this->data;
 
             $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('edit_research', $data);
+            $this->load->view('edit_employment', $data);
             $this->load->view('theme/mytheme/template/footer', $data);
         else :
-            redirect('education');
+            redirect('employment');
         endif;
     }
 
     public function edit_process() {
-        $this->load->model('education_model');
-        $this->education_model->update_education();
-        redirect('education');
+        $this->load->model('employment_model');
+        $this->employment_model->update_employment();
+        redirect('employment');
     }
 
 }

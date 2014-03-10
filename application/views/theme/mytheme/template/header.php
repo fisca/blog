@@ -61,7 +61,7 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="<?php echo base_url(); ?>index.php/profile">Profile</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/education">Education</a></li>
-                                <li><a href="#">Academic</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/employment">Employment</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/research">Research</a></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->

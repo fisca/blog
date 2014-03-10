@@ -16,38 +16,67 @@
             endif;
             ?>
             <table class="table table-bordered">
-                
-                <tr><th>&nbsp</th><th style="text-align: center;">Institue</th><th style="text-align: center;">Period</th><th style="text-align: center;">Supervisor</th></tr>
-                
-                <tr>
-                    <td><strong>Postdoctoral Training</strong></td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr>
-                    <td><strong>Research Training : Short Term (<3 months)</strong></td>
-                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh </td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr>
-                    <td><strong>Research Training : Long Term (>3 months)</strong></td>
-                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh </td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                </tr>
+
+                <tr><th>&nbsp</th><th style="text-align: center;">Institue</th><th style="text-align: center;">Period</th><th style="text-align: center;">Supervisor</th><th>&nbsp;</th></tr>
+
+                <?php
+
+                function training_type($type) {
+                    switch ($type) {
+                        case 'postdoc':
+                            echo 'Postdoctoral Training';
+                            break;
+                        case 'short':
+                            echo 'Research Training : Short Term (<3 months)';
+                            break;
+                        case 'short':
+                            echo 'Research Training : Long Term (>3 months)';
+                            break;
+                        default:
+                            echo '';
+                            break;
+                    }
+                }
+
+                foreach ($query as $row) :
+                    ?>
+                    <tr>
+                        <td><strong><?php training_type($row->training_type); ?></strong></td>
+                        <td><?php echo $row->institute; ?></td>
+                        <td><?php echo date("F j, Y", strtotime($row->training_start)) . ' - ' . date("F j, Y", strtotime($row->training_end)); ?></td>
+                        <td><?php echo $row->supervisor; ?></td>
+                        <td>
+                            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/edit_research">
+                                <input type="hidden" name="training_id" value="<?php echo $row->training_id; ?>">
+                                <button type="submit" class="btn btn-default">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
+
                 <tr>
                     <td><strong>Field of Expertise/Competency</strong></td>
-                    <td colspan="3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat</td>
+                    <td colspan="3">
+                        <?php foreach ($query_expertise as $r) : ?>
+                        <?php echo $r->topic; ?>
+                        <?php endforeach; ?>
+                    </td>
+                    <td>
+                        <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/edit_research">
+                            <input type="hidden" name="expertise" value="">
+                            <button type="submit" class="btn btn-default">Edit</button>
+                        </form>
+                    </td>
                 </tr>
-                
-            </table>
 
-            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/edit_research">
-                <input type="hidden" name="researcher_id" value="1">
-                <button type="submit" class="btn btn-default">edit</button>
+            </table>
+            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/add_research">
+                <input type="hidden" name="expertise" value="">
+                <button type="submit" class="btn btn-default">Add</button>
             </form>
+
+
 
             <p>&nbsp;</p>
 
