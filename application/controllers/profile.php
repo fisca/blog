@@ -37,28 +37,35 @@ class Profile extends CI_Controller {
         $this->load->model('profile_model');
 
         if ($this->session->userdata('level') == 10) {
-
             $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
 
             $this->data['query'] = $this->profile_model->get_list();
 
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
+
             $this->load->view('researcher_list', $data);
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
-            foreach ($user_data as $row) :
-                $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
 
-            endforeach;
+            if (!$user_data):
+                $user_welcome0 = 'คุณ ' . $this->session->userdata('username');
+                $this->data['researcher_key'] = $this->session->userdata('researcher_key');
+            else :
+                foreach ($user_data as $row) :
+                    $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
+                endforeach;
+            endif;
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
-
             $this->data['query'] = $this->profile_model->get_profile($this->session->userdata('researcher_key'));
+
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
+
             $this->load->view('profile', $data);
         }
+
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
@@ -93,8 +100,9 @@ class Profile extends CI_Controller {
     }
 
     public function edit_profile() {
-        $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
-        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_id)) :
+        $edit_key = $this->security->xss_clean($this->input->post('researcher_key'));
+        
+        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_key)) :
             $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
             $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
             $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
@@ -113,7 +121,7 @@ class Profile extends CI_Controller {
                 $this->data['welcome'] .= $user_welcome0 . $user_welcome;
             }
 
-            $this->data['query'] = $this->profile_model->get_profile($edit_id);
+            $this->data['query'] = $this->profile_model->get_profile($edit_key);
 
             $this->data['title'] = "แก้ไข Profile";
 
@@ -122,6 +130,7 @@ class Profile extends CI_Controller {
             $this->load->view('theme/mytheme/template/header', $data);
             $this->load->view('edit_profile', $data);
             $this->load->view('theme/mytheme/template/footer', $data);
+            
         else :
             redirect('profile');
         endif;
@@ -131,6 +140,10 @@ class Profile extends CI_Controller {
         $this->load->model('profile_model');
         $this->profile_model->update_profile();
         redirect('profile');
+    }
+
+    public function add_profile() {
+        
     }
 
 }

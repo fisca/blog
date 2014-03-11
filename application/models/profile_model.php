@@ -26,7 +26,7 @@ class Profile_model extends CI_Model {
     }
 
     public function update_profile() {
-        $researcher_id = $this->security->xss_clean($this->input->post('researcher_id'));
+        $researcher_key = $this->security->xss_clean($this->input->post('researcher_key'));
         $firstname_en = $this->security->xss_clean($this->input->post('firstname_en'));
         $firstname_th = $this->security->xss_clean($this->input->post('firstname_th'));
         $lastname_en = $this->security->xss_clean($this->input->post('lastname_en'));
@@ -53,7 +53,7 @@ class Profile_model extends CI_Model {
                 firstname_en='$firstname_en', firstname_th='$firstname_th', lastname_en='$lastname_en', lastname_th='$lastname_th', title_en = '$title_en', title_th='$title_th', gender='$gender',
                 street_th='$street_th', sub_district_th='$sub_district_th', district_th='$district_th', province_th='$province_th', postal_code='$postal_code',
                 phone='$phone', mobile_phone='$mobile_phone', email='$email', website='$website' 
-            WHERE researcher_id = $researcher_id;";
+            WHERE researcher_key = $researcher_key;";
         $this->db->query($sql);
     }
 

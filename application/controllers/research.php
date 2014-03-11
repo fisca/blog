@@ -30,8 +30,8 @@ class Research extends CI_Controller {
 
         $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
 
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . date("F j, Y g:i:s a." ,strtotime($this->session->userdata('recent_login')));
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . date("F j, Y g:i:s a." ,strtotime($this->session->userdata('last_time_login')));
+        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . date("F j, Y g:i:s a.", strtotime($this->session->userdata('recent_login')));
+        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . date("F j, Y g:i:s a.", strtotime($this->session->userdata('last_time_login')));
 
         $this->load->model('profile_model');
         $this->load->model('research_model');
@@ -94,14 +94,15 @@ class Research extends CI_Controller {
     }
 
     public function edit_research() {
-        $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
-        $this->load->model('education_model');
-        $education_data = $this->education_model->get_edit_education($edit_id);
-        
-        foreach ($education_data as $row) :
+        $edit_id = $this->security->xss_clean($this->input->post('training_id'));
+
+        $this->load->model('research_model');
+        $training_data = $this->research_model->get_edit_research($edit_id);
+
+        foreach ($training_data as $row) :
             $researcher_id = $row->researcher_id;
-        endforeach;        
-        
+        endforeach;
+
         if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $researcher_id)) :
             $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
             $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
@@ -121,10 +122,9 @@ class Research extends CI_Controller {
                 $this->data['welcome'] .= $user_welcome0 . $user_welcome;
             }
 
-            $this->load->model('education_model');
-            $this->data['query'] = $this->education_model->get_edit_education($edit_id);
+            $this->data['query'] = $this->research_model->get_edit_research($edit_id);            
 
-            $this->data['title'] = "Edit Research Data";
+            $this->data['title'] = "Edit Research Training";
 
             $data = $this->data;
 
@@ -132,14 +132,74 @@ class Research extends CI_Controller {
             $this->load->view('edit_research', $data);
             $this->load->view('theme/mytheme/template/footer', $data);
         else :
-            redirect('education');
+            redirect('research');
         endif;
     }
 
-    public function edit_process() {
-        $this->load->model('education_model');
-        $this->education_model->update_education();
-        redirect('education');
+    public function edit_expertise() {
+        $edit_expertise_id = $this->security->xss_clean($this->input->post('expertise_id'));
+
+        $this->load->model('research_model');
+        $expertise_data = $this->research_model->get_edit_expertise($edit_expertise_id);
+
+        foreach ($expertise_data as $row) :
+            $researcher_id = $row->researcher_id;
+        endforeach;
+
+        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $researcher_id)) :
+            $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
+            $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
+            $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
+
+            $this->load->model('profile_model');
+
+            if ($this->session->userdata('level') == 10) {
+                $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
+            } else {
+                $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
+                foreach ($user_data as $row) :
+                    $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
+
+                endforeach;
+
+                $this->data['welcome'] .= $user_welcome0 . $user_welcome;
+            }
+            
+            $this->data['query_expertise'] = $this->research_model->get_edit_expertise($edit_expertise_id);
+
+            $this->data['title'] = "Edit Expertise";
+
+            $data = $this->data;
+
+            $this->load->view('theme/mytheme/template/header', $data);
+            $this->load->view('edit_expertise', $data);
+            $this->load->view('theme/mytheme/template/footer', $data);
+        else :
+            redirect('research');
+        endif;
+    }
+
+    public function edit_training_process() {
+        $this->load->model('research_model');
+        $this->research_model->update_training();
+        redirect('research');
+    }
+    
+    public function edit_expertise_process(){
+        $this->load->model('research_model');
+        $this->research_model->update_expertise();
+        redirect('research');
+    }
+
+    public function add_research() {
+        $this->check_isvalidated();
+    }
+    
+    public function delete_research($id){
+        $this->check_isvalidated();
+        $this->load->model('research_model');
+        $this->research_model->delete_training($id);
+        redirect('research');
     }
 
 }

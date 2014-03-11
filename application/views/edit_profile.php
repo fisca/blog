@@ -15,7 +15,7 @@
                     <?php foreach ($query as $row) : ?>                    
                         <tr><td><strong>คำนำหน้าชื่อ</strong></td>
                             <td>
-                                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                                <input type="hidden" name="researcher_key" value="<?php echo $row->researcher_key; ?>">
                                 <input type="text" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>">
                             </td>
                         </tr>

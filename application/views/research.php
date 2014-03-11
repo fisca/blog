@@ -29,7 +29,7 @@
                         case 'short':
                             echo 'Research Training : Short Term (<3 months)';
                             break;
-                        case 'short':
+                        case 'long':
                             echo 'Research Training : Long Term (>3 months)';
                             break;
                         default:
@@ -57,17 +57,19 @@
 
                 <tr>
                     <td><strong>Field of Expertise/Competency</strong></td>
+                    <?php foreach ($query_expertise as $r) : ?>
                     <td colspan="3">
-                        <?php foreach ($query_expertise as $r) : ?>
+                        
                         <?php echo $r->topic; ?>
-                        <?php endforeach; ?>
+                        
                     </td>
                     <td>
-                        <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/edit_research">
-                            <input type="hidden" name="expertise" value="">
+                        <form role="form" method="post" action="<?php echo base_url(); ?>index.php/research/edit_expertise">
+                            <input type="hidden" name="expertise_id" value="<?php echo $r->expertise_id; ?>">
                             <button type="submit" class="btn btn-default">Edit</button>
                         </form>
                     </td>
+                    <?php endforeach; ?>
                 </tr>
 
             </table>
