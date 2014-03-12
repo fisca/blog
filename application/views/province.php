@@ -97,8 +97,9 @@ function pro_list_th($data) {
 
 $province_en = array("Amnat Charoen", "Ang Thong", "Buriram", "Chachoengsao", "Chai Nat", "Chaiyaphum", "Chanthaburi", "Chiang Mai", "Chiang Rai", "Chon Buri", "Chumphon", "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Krung Thep Mahanakhon", "Lampang", "Lamphun", "Loei", "Lop Buri", "Mae Hong Son", "Maha Sarakham", "Mukdahan", "Nakhon Nayok", "Nakhon Pathom", "Nakhon Phanom", "Nakhon Ratchasima", "Nakhon Sawan", "Nakhon Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lamphu", "Nong Khai", "Nonthaburi", "Pathum Thani", "Pattani", "Phangnga", "Phatthalung", "Phayao", "Phetchabun", "Phetchaburi", "Phichit", "Phitsanulok", "Phra Nakhon Si Ayutthaya", "Phrae", "Phuket", "Prachin Buri", "Prachuap Khiri Khan", "Ranong", "Ratchaburi", "Rayong", "Roi Et", "Sa Kaeo", "Sakon Nakhon", "Samut Prakan", "Samut Sakhon", "Samut Songkhram", "Sara Buri", "Satun", "Sing Buri", "Sisaket", "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang", "Trat", "Ubon Ratchathani", "Udon Thani", "Uthai Thani", "Uttaradit", "Yala", "Yasothon");
 ?>
-<?php /*
-  <select name="province">
+
+<?php $province = '
+  <select name="province_th">
   <option value="" selected>--------- เลือกจังหวัด ---------</option>
   <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
   <option value="กระบี่">กระบี่ </option>
@@ -179,5 +180,5 @@ $province_en = array("Amnat Charoen", "Ang Thong", "Buriram", "Chachoengsao", "C
   <option value="อ่างทอง">อ่างทอง </option>
   <option value="อื่นๆ">อื่นๆ</option>
   </select>
- */
+ ';
 ?>

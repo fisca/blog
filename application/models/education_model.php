@@ -20,6 +20,12 @@ class Education_model extends CI_Model {
         return $query->result();
     }
     
+    public function get_list(){
+        $query = $this->db->get('ci_education');
+        return $query->result();
+    }
+
+
     public function update_education() {
         $education_id = $this->security->xss_clean($this->input->post('education_id'));
 
@@ -37,6 +43,10 @@ class Education_model extends CI_Model {
                 country='$country', thesis_title='$thesis_title', keyword='$keyword' 
             WHERE education_id = $education_id;";
         $this->db->query($sql);
+    }
+    
+    public function insert_education(){
+        
     }
 
 }

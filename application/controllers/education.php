@@ -45,7 +45,7 @@ class Education extends CI_Controller {
 
             $data = $this->data;
             $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('researcher_list', $data);
+            $this->load->view('education', $data);
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
             foreach ($user_data as $row) :
@@ -54,6 +54,9 @@ class Education extends CI_Controller {
             endforeach;
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
+
+
+            $this->data['researcher_key'] = $this->session->userdata('researcher_key');
 
             $this->data['query'] = $this->education_model->get_education($this->session->userdata('researcher_key'));
             $data = $this->data;
@@ -97,11 +100,11 @@ class Education extends CI_Controller {
         $edit_id = $this->security->xss_clean($this->input->post('education_id'));
         $this->load->model('education_model');
         $education_data = $this->education_model->get_edit_education($edit_id);
-        
+
         foreach ($education_data as $row) :
             $researcher_id = $row->researcher_id;
-        endforeach;        
-        
+        endforeach;
+
         if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $researcher_id)) :
             $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
             $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
@@ -139,6 +142,32 @@ class Education extends CI_Controller {
     public function edit_process() {
         $this->load->model('education_model');
         $this->education_model->update_education();
+        redirect('education');
+    }
+
+    public function add_education() {
+        if (!$this->input->post('researcher_key')) {
+            redirect('education');
+        }
+        $this->data['add_key'] = $this->security->xss_clean($this->input->post('researcher_key'));
+
+        $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br> คุณ ';
+        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
+        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
+
+        $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
+
+        $this->data['title'] = "Add Education";
+        $data = $this->data;
+
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('add_education', $data);
+        $this->load->view('theme/mytheme/template/footer', $data);
+    }
+
+    public function add_process() {
+        $this->load->model('education_model');
+        // $this->education_model->insert_education();
         redirect('education');
     }
 

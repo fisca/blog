@@ -11,7 +11,7 @@
             
             <?php if (!$query) : ?>
                 <h4 style="text-align: center; color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติส่วนตัว</h4>
-                <form method="post" action="">
+                <form method="post" action="<?php echo base_url(); ?>index.php/profile/add_profile">
                     <div style="text-align: center;">
                         <input type="hidden" name="researcher_key" value="<?php echo $researcher_key; ?>">
                         <button class="btn btn-default">กรอกข้อมูลประวัติส่วนตัว</button>

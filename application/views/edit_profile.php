@@ -55,7 +55,7 @@
                         <tr><td><strong>Website</strong></td><td><input style="width: 100%;" type="text" name="website" value="<?php echo $row->website; ?>"></td></tr>
 
                     <?php endforeach; ?>
-                    <tr><td>&nbsp;</td><td><button type="submit" class="btn btn-default">Submit</button> &nbsp;<a href="<?php echo base_url() . "index.php/profile/id/" . $row->researcher_id; ?>">Cancel</a></td></tr>
+                    <tr><td>&nbsp;</td><td><button type="submit" class="btn btn-default">Submit</button> &nbsp;<a href="<?php echo base_url() . "index.php/profile/key/" . $row->researcher_key; ?>">Cancel</a></td></tr>
                 </table>
             </form>
             <script>
