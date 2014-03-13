@@ -19,11 +19,11 @@
                                 <input type="text" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>">
                             </td>
                         </tr>
-                        <tr><td><strong>ชื่อ</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_th" required value="<?php echo $row->firstname_th; ?>"></td></tr>
-                        <tr><td><strong>นามสกุล</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_th" required value="<?php echo $row->lastname_th; ?>"></td></tr>
+                        <tr><td><strong>ชื่อ</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_th" required style="width: 50%;" value="<?php echo $row->firstname_th; ?>"></td></tr>
+                        <tr><td><strong>นามสกุล</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_th" required style="width: 50%;" value="<?php echo $row->lastname_th; ?>"></td></tr>
                         <tr><td><strong>Title</strong></td><td><input type="text" name="title_en" value="<?php echo $row->title_en; ?>"></td></tr>
-                        <tr><td><strong>Firstname</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_en" required value="<?php echo $row->firstname_en; ?>"></td></tr>
-                        <tr><td><strong>Lastname</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_en" required value="<?php echo $row->lastname_en; ?>"></td></tr>                        
+                        <tr><td><strong>Firstname</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_en" required style="width: 50%;" value="<?php echo $row->firstname_en; ?>"></td></tr>
+                        <tr><td><strong>Lastname</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_en" required style="width: 50%;" value="<?php echo $row->lastname_en; ?>"></td></tr>                        
                         <tr><td><strong>เพศ</strong></td>
                             <td>
                                 <input type="radio" name="gender" value="male"<?php
@@ -39,7 +39,7 @@
                             </td>
                         </tr>
 
-                        <tr><td><strong>ที่อยู่ที่ติดต่อได้</strong> </td><td><input type="text" name="street_th" value="<?php echo $row->street_th; ?>"></td></tr>
+                        <tr><td><strong>ที่อยู่ที่ติดต่อได้</strong> </td><td><input type="text" name="street_th" style="width: 100%;" value="<?php echo $row->street_th; ?>"></td></tr>
                         <tr><td><strong>แขวง/ตำบล</strong></td><td><input type="text" name="sub_district_th" value="<?php echo $row->sub_district_th; ?>"></td></tr>
                         <tr><td><strong>เขต/อำเภอ</strong></td><td><input type="text" name="district_th" value="<?php echo $row->district_th; ?>"></td></tr>
                         <?php include 'province.php'; ?>    
