@@ -54,6 +54,8 @@ class Employment extends CI_Controller {
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
             
+            $this->data['researcher_key'] = $this->session->userdata('researcher_key');
+            
             $this->load->model('employment_model');
             $this->data['query'] = $this->employment_model->get_employment($this->session->userdata('researcher_key'));
             $data = $this->data;

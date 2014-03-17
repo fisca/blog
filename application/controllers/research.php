@@ -53,6 +53,8 @@ class Research extends CI_Controller {
             endforeach;
 
             $this->data['welcome'] .= $user_welcome0 . $user_welcome;
+            
+            $this->data['researcher_key'] = $this->session->userdata('researcher_key');
 
             $this->data['query'] = $this->research_model->get_research($this->session->userdata('researcher_key'));
             $this->data['query_expertise'] = $this->research_model->get_expertise($this->session->userdata('researcher_key'));

@@ -36,10 +36,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>สถาบันการศึกษา<span style="color: red;">**</span></td><td><input style="width: 50%;" name="institute" required value=""></td>
+                        <td>สถาบันการศึกษา<span style="color: red;">**</span></td><td><input style="width: 100%;" name="institute" required value=""></td>
                     </tr>
                     <tr>
-                        <td>สาขาวิชา<span style="color: red;">**</span></td><td><input name="major" required value=""></td>
+                        <td>สาขาวิชา<span style="color: red;">**</span></td><td><input style="width: 100%;" name="major" required value=""></td>
                     </tr>
                     <tr>
                         <td>ประเทศ<span style="color: red;">**</span></td>

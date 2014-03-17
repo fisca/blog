@@ -11,7 +11,7 @@
                 <div class="col-xs-12 col-sm-4 col-md-4">&nbsp;</div>
             </div>
             <?php if (!$query) : ?>
-                <h4 style="text-align: center; color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติส่วนตัว</h4>
+                <h4 style="text-align: center; color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติการศึกษา</h4>
                 <form method="post" action="<?php echo base_url(); ?>index.php/education/add_education">
                     <div style="text-align: center;">
                         <input type="hidden" name="researcher_key" value="<?php echo $researcher_key; ?>">

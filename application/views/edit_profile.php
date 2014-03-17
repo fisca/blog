@@ -64,7 +64,7 @@
                 });
             </script>
 
-            <p><strong>หมายเหตุ</strong>&nbsp; Email กรอกหลายอันได้โดยใช้เคริ่องหมาย comma (,) คั่น เช่น email1@sample.com, email2@sample.com เป็นต้น</p>
+            <p><strong>หมายเหตุ</strong>&nbsp; Email กรอกหลายอันได้โดยใช้เครื่องหมาย comma (,) คั่น เช่น email1@sample.com, email2@sample.com เป็นต้น</p>
 
         </div>
 
