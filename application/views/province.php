@@ -8,7 +8,7 @@ function pro_select($value, $data) {
 
 function pro_list_th($data) {
     return '
-    <select name="province_th">
+    <select class="form-control" name="province_th" id="province_th">
       <option value=""' . pro_select("", $data) . '>--------- เลือกจังหวัด ---------</option>
       <option value="กรุงเทพมหานคร"' . pro_select('กรุงเทพมหานคร', $data) . '>กรุงเทพมหานคร</option>
       <option value="กระบี่"' . pro_select('กระบี่', $data) . '>กระบี่ </option>

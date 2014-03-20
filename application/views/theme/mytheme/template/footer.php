@@ -3,6 +3,7 @@
 <div class="container">
     <footer style="text-align: center;">
         &copy; 2014 ThEP-Center.org
+        <p>&nbsp;</p>
     </footer>
 </div> <!-- /.container -->
 

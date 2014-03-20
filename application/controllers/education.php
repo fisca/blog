@@ -27,48 +27,43 @@ class Education extends CI_Controller {
 
     public function index() {
         // If the user is validated, then this function will run
-        $this->data['logout_tag'] = '<br /><a href="' . base_url() . 'index.php/home/do_logout">Logout</a>';
+        $this->user_check();
 
-        $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
-
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
-
-        $this->load->model('profile_model');
         $this->load->model('education_model');
 
-        if ($this->session->userdata('level') == 10) {
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
 
-            $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
-
-            $this->data['query'] = $this->education_model->get_list();
-
-            $data = $this->data;
-            $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('education', $data);
-        } else {
-            $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
-            foreach ($user_data as $row) :
-                $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
-
-            endforeach;
-
-            $this->data['welcome'] .= $user_welcome0 . $user_welcome;
-
-
-            $this->data['researcher_key'] = $this->session->userdata('researcher_key');
-
-            $this->data['query'] = $this->education_model->get_education($this->session->userdata('researcher_key'));
-            $data = $this->data;
-            $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('education', $data);
-        }
+        $this->data['query'] = $this->education_model->get_education($this->session->userdata('researcher_key'));
+        $data = $this->data;
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('education', $data);
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
     private function check_isvalidated() {
         if (!$this->session->userdata('validated')) {
             redirect('login');
+        }
+    }
+
+    public function user_check() {
+        $this->data['recent_login'] = $this->session->userdata('recent_login');
+        $this->data['last_time_login'] = $this->session->userdata('last_time_login');
+        $this->load->model('profile_model');
+        if ($this->session->userdata('level') == 10) {
+            redirect("admin", "location");
+        } else {
+            $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
+
+            if (!$user_data):
+                $this->data['username'] = $this->session->userdata('username');
+
+                $this->data['researcher_key'] = $this->session->userdata('researcher_key');
+            else :
+                foreach ($user_data as $row) :
+                    $this->data['username'] = $row->firstname_th . ' ' . $row->lastname_th;
+                endforeach;
+            endif;
         }
     }
 

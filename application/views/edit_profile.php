@@ -1,72 +1,161 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-4" style="border: 1px solid  #ccc;"><?php echo $welcome; ?></div>                
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h2 style="text-align: center;">Edit Profile</h2>
-                    <h4 style="text-align: center; color: #89919c;">(แก้ไขข้อมูลประวัติส่วนตัว)</h4>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">&nbsp;</div>
-            </div>
+    <div class="row well">
 
-            <form role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_process">
-                <table class="table">
-                    <?php foreach ($query as $row) : ?>                    
-                        <tr><td><strong>คำนำหน้าชื่อ</strong></td>
-                            <td>
-                                <input type="hidden" name="researcher_key" value="<?php echo $row->researcher_key; ?>">
-                                <input type="text" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>">
-                            </td>
-                        </tr>
-                        <tr><td><strong>ชื่อ</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_th" required style="width: 50%;" value="<?php echo $row->firstname_th; ?>"></td></tr>
-                        <tr><td><strong>นามสกุล</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_th" required style="width: 50%;" value="<?php echo $row->lastname_th; ?>"></td></tr>
-                        <tr><td><strong>Title</strong></td><td><input type="text" name="title_en" value="<?php echo $row->title_en; ?>"></td></tr>
-                        <tr><td><strong>Firstname</strong><span style="color: red;">**</span></td><td><input type="text" name="firstname_en" required style="width: 50%;" value="<?php echo $row->firstname_en; ?>"></td></tr>
-                        <tr><td><strong>Lastname</strong><span style="color: red;">**</span></td><td><input type="text" name="lastname_en" required style="width: 50%;" value="<?php echo $row->lastname_en; ?>"></td></tr>                        
-                        <tr><td><strong>เพศ</strong></td>
-                            <td>
-                                <input type="radio" name="gender" value="male"<?php
-                                if ($row->gender == 'male') {
-                                    echo ' checked';
-                                }
-                                ?>> ชาย &nbsp;
-                                <input type="radio" name="gender" value="female"<?php
-                                if ($row->gender == 'female') {
-                                    echo ' checked';
-                                }
-                                ?>> หญิง
-                            </td>
-                        </tr>
+        <form class="form-horizontal" role="form" method="post" action="<?php echo base_url(); ?>index.php/profile/edit_process">
+            <?php foreach ($query as $row) : ?>
+                <fieldset>
+                    <legend class="text-center">Edit Profile</legend>
 
-                        <tr><td><strong>ที่อยู่ที่ติดต่อได้</strong> </td><td><input type="text" name="street_th" style="width: 100%;" value="<?php echo $row->street_th; ?>"></td></tr>
-                        <tr><td><strong>แขวง/ตำบล</strong></td><td><input type="text" name="sub_district_th" value="<?php echo $row->sub_district_th; ?>"></td></tr>
-                        <tr><td><strong>เขต/อำเภอ</strong></td><td><input type="text" name="district_th" value="<?php echo $row->district_th; ?>"></td></tr>
-                        <?php include 'province.php'; ?>    
-                        <tr><td><strong>จังหวัด</strong></td><td><?php echo pro_list_th($row->province_th); ?></td></tr>
-                        <tr><td><strong>รหัสไปรษณีย์</strong></td><td><input type="text" name="postal_code" value="<?php echo $row->postal_code; ?>"></td></tr>
-                        <tr><td><strong>โทรศัพท์</strong></td><td><input type="text" name="phone" value="<?php echo $row->phone; ?>"></td></tr>
-                        <tr><td><strong>โทรศัพท์มือถือ</strong></td><td><input type="text" name="mobile_phone" value="<?php echo $row->mobile_phone; ?>"></td></tr>
-                        <tr><td><strong>Email</strong><span style="color: red;">**</span></td>
-                            <td>
-                                <input style="width: 100%;" type="email" name="email" required multiple value="<?php echo $row->email; ?>">                                
-                            </td>
-                        </tr>
-                        <tr><td><strong>Website</strong></td><td><input style="width: 100%;" type="text" name="website" value="<?php echo $row->website; ?>"></td></tr>
+                    <input type="hidden" name="researcher_key" value="<?php echo $row->researcher_key; ?>">
 
-                    <?php endforeach; ?>
-                    <tr><td>&nbsp;</td><td><button type="submit" class="btn btn-default">Submit</button> &nbsp;<a href="<?php echo base_url() . "index.php/profile/key/" . $row->researcher_key; ?>">Cancel</a></td></tr>
-                </table>
-            </form>
-            <script>
-                $(function() {
-                    $("#title_th").focus();
-                });
-            </script>
+                    <div class="form-group">
+                        <label for="title_th" class="col-lg-2 control-label">คำนำหน้าชื่อ</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="title_th" id="title_th" value="<?php echo $row->title_th; ?>" placeholder="เช่น ดร., ผศ.ดร., ศ.ดร., นพ., ร.ต., นาย เป็นต้น">
+                        </div>
+                    </div>
 
-            <p><strong>หมายเหตุ</strong>&nbsp; Email กรอกหลายอันได้โดยใช้เครื่องหมาย comma (,) คั่น เช่น email1@sample.com, email2@sample.com เป็นต้น</p>
+                    <div class="form-group">
+                        <label for="firstname_th" class="col-lg-2 control-label">ชื่อ<span style="color: red;">**</span></label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="firstname_th" id="firstname_th" required value="<?php echo $row->firstname_th; ?>" placeholder="ชื่อภาษาไทย">
+                        </div>
+                    </div>
 
-        </div>
+                    <div class="form-group">
+                        <label for="lastname_th" class="col-lg-2 control-label">สกุล<span style="color: red;">**</span></label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="lastname_th" id="lastname_th" required value="<?php echo $row->lastname_th; ?>" placeholder="สกุลภาษาไทย">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title_en" class="col-lg-2 control-label">Title</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="title_en" id="title_en" value="<?php echo $row->title_en; ?>" placeholder="Dr., Prof.Dr., Mr., Ms. etc.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname_en" class="col-lg-2 control-label">Firstname<span style="color: red;">**</span></label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="firstname_en" id="firstname_en" required value="<?php echo $row->firstname_en; ?>" placeholder="Your firstname in English.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname_en" class="col-lg-2 control-label">Lastname<span style="color: red;">**</span></label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="lastname_en" id="lastname_en" required value="<?php echo $row->lastname_en; ?>" placeholder="Your lastname in English.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">เพศ (gender)</label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" id="male" value="male"<?php
+                                    if ($row->gender == 'male') {
+                                        echo ' checked';
+                                    }
+                                    ?>>
+                                    ชาย (male)
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" id="female" value="female"<?php
+                                    if ($row->gender == 'female') {
+                                        echo ' checked';
+                                    }
+                                    ?>>
+                                    หญิง (female)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="street_th" class="col-lg-2 control-label">ที่อยู่</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="street_th" id="street_th" value="<?php echo $row->street_th; ?>" placeholder="เลขที่ อาคาร ซอย ถนน">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sub_district_th" class="col-lg-2 control-label">แขวง/ตำบล</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="sub_district_th" id="sub_district_th" value="<?php echo $row->sub_district_th; ?>" placeholder="แขวง/ตำบล">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district_th" class="col-lg-2 control-label">เขต/อำเภอ</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="district_th" id="district_th" value="<?php echo $row->district_th; ?>" placeholder="เขต/อำเภอ">
+                        </div>
+                    </div>
+
+                    <?php include 'province.php'; ?>
+                    <div class="form-group">
+                        <label for="province_th" class="col-lg-2 control-label">จังหวัด</label>
+                        <div class="col-lg-10">
+                            <?php echo pro_list_th($row->province_th); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postal_code" class="col-lg-2 control-label">รหัสไปรษณีย์</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="postal_code" id="postal_code" value="<?php echo $row->postal_code; ?>" placeholder="รหัสไปรษณีย์">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-lg-2 control-label">โทรศัพท์</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $row->phone; ?>" placeholder="โทรศัพท์">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile_phone" class="col-lg-2 control-label">โทรศัพท์มือถือ</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="mobile_phone" id="mobile_phone" value="<?php echo $row->mobile_phone; ?>" placeholder="โทรศัพท์มือถือ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-lg-2 control-label">Email<span style="color: red;">**</span></label>
+                        <div class="col-lg-10">
+                            <input type="email" class="form-control" name="email" id="email" multiple required value="<?php echo $row->email; ?>" placeholder="email1@example.com, email2@example">
+                            <span class="help-block">สามารถกรอก email ได้หลาย email โดยใช้เครื่องหมาย comma (,) คั่น เช่น email1@example.com, email2@example เป็นต้น</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website" class="col-lg-2 control-label">Website</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="website" id="website" value="<?php echo $row->website; ?>" placeholder="http://www.example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-saved"></span> Submit</button>                                 
+                            &nbsp;<a href="<?php echo base_url() . "index.php/profile/key/" . $row->researcher_key; ?>"><strong>Cancel</strong></a>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php endforeach; ?>
+        </form>
+
+        <script>
+            $(function() {
+                $("#title_th").focus();
+            });
+        </script>
 
     </div>
 

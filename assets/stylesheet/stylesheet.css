@@ -3,7 +3,7 @@
     Author     : Research_Com
 */
 body{
-    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    // font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
     font-size: 14px;
 }
 
@@ -11,11 +11,73 @@ select#expertise option[disabled]{
     color: black;
 }
 
+.navbar {
+    border-radius: 0;
+}
+
+
 @media (min-width: 1200px)  {
     .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .row{
+        width: 980px;
+        margin: auto;
+    }
+    .container-fluid{
         width: 980px;
     }
 } /*  END @media (min-width: 1200px) */
+
+@media (min-width:980px) and (max-width: 1199px){
+
+    .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .row{
+        width: 980px;
+        margin: auto;
+    }
+    .container-fluid{
+        width: 980px;
+    }
+}
+
+
+@media (min-width:768px) and (max-width: 979px){
+
+    .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .row{
+        width: 768px;
+        margin: auto;
+    }
+    .container-fluid{
+        width: 768px;
+    }
+}
+
+@media (max-width: 767px){
+    .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .row{
+        margin: 0 10px;
+    }
+
+}
+
+
 
 .form-horizontal .control-label {
     // text-align: left;
