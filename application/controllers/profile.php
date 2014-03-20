@@ -95,7 +95,7 @@ class Profile extends CI_Controller {
         $edit_key = $this->security->xss_clean($this->input->post('researcher_key'));
 
         if ($this->session->userdata('researcher_key') == $edit_key) :
-            
+
             $this->user_check();
 
             $this->data['query'] = $this->profile_model->get_profile($edit_key);

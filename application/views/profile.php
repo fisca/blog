@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row well">
 
+        <h2 style="text-align: center;">Profile <span class="glyphicon glyphicon-user"></span></h2>
+        <h4 style="text-align: center;">(ข้อมูลประวัติส่วนตัว)</h4>
+        <p>&nbsp;</p>
+
         <?php if (!$query) : ?>
 
             <div class="alert alert-danger">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติส่วนตัว</div>
@@ -13,9 +17,6 @@
 
         <?php else: ?>
 
-            <h2 style="text-align: center;">Profile <span class="glyphicon glyphicon-user"></span></h2>
-            <h4 style="text-align: center;">(ข้อมูลประวัติส่วนตัว)</h4>
-            <p>&nbsp;</p>
             <?php foreach ($query as $row) : ?>
 
                 <div class="col-md-2"><strong style="color: #89919c;">ชื่อ-นามสกุล</strong></div>

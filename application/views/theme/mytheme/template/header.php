@@ -7,7 +7,6 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
         <title><?php echo $title; ?></title>
 
         <!-- Bootstrap core CSS -->
@@ -31,7 +30,26 @@
         <script src="<?php echo base_url(); ?>assets/jqueryui/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
         <style>
             #ui-datepicker-div{
-                background-color: #b2dba1;
+                background-color: black;
+                // background-color: #b2dba1;
+            }
+
+            .form-date{
+                // display: block;
+                // width: 100%;
+                height: 38px;
+                padding: 8px 12px;
+                font-size: 14px;
+                line-height: 1.42857143;
+                color: #272b30;
+                background-color: #ffffff;
+                background-image: none;
+                border: 1px solid #cccccc;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
             }
             .ui-icon.ui-icon-circle-triangle-e,
             .ui-icon.ui-icon-circle-triangle-w {

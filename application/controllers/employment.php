@@ -29,45 +29,42 @@ class Employment extends CI_Controller {
         // If the user is validated, then this function will run
         $this->data['logout_tag'] = '<br /><a href="' . base_url() . 'index.php/home/do_logout">Logout</a>';
 
-        $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
+        $this->user_check();
 
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
 
-        $this->load->model('profile_model');
-
-        if ($this->session->userdata('level') == 10) {
-
-            $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
-
-            $this->data['query'] = $this->profile_model->get_list();
-
-            $data = $this->data;
-            $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('researcher_list', $data);
-        } else {
-            $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
-            foreach ($user_data as $row) :
-                $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
-
-            endforeach;
-
-            $this->data['welcome'] .= $user_welcome0 . $user_welcome;
-            
-            $this->data['researcher_key'] = $this->session->userdata('researcher_key');
-            
-            $this->load->model('employment_model');
-            $this->data['query'] = $this->employment_model->get_employment($this->session->userdata('researcher_key'));
-            $data = $this->data;
-            $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('employment', $data);
-        }
+        $this->load->model('employment_model');
+        $this->data['query'] = $this->employment_model->get_employment($this->session->userdata('researcher_key'));
+        $data = $this->data;
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('employment', $data);
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 
     private function check_isvalidated() {
         if (!$this->session->userdata('validated')) {
             redirect('login');
+        }
+    }
+
+    public function user_check() {
+        $this->data['recent_login'] = $this->session->userdata('recent_login');
+        $this->data['last_time_login'] = $this->session->userdata('last_time_login');
+        $this->load->model('profile_model');
+        if ($this->session->userdata('level') == 10) {
+            redirect("admin", "location");
+        } else {
+            $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
+
+            if (!$user_data):
+                $this->data['username'] = $this->session->userdata('username');
+
+                $this->data['researcher_key'] = $this->session->userdata('researcher_key');
+            else :
+                foreach ($user_data as $row) :
+                    $this->data['username'] = $row->firstname_th . ' ' . $row->lastname_th;
+                endforeach;
+            endif;
         }
     }
 
@@ -97,38 +94,21 @@ class Employment extends CI_Controller {
 
     public function edit_employment() {
         $edit_id = $this->security->xss_clean($this->input->post('researcher_id'));
-        if (($this->session->userdata('level') == 10) or ($this->session->userdata('researcher_key') == $edit_id)) :
-            $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br>';
-            $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
-            $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
+        
+        $this->user_check();
 
-            $this->load->model('profile_model');
+        $this->load->model('employment_model');
+        $this->data['query'] = $this->employment_model->get_employment($edit_id);
 
-            if ($this->session->userdata('level') == 10) {
-                $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
-            } else {
-                $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
-                foreach ($user_data as $row) :
-                    $user_welcome0 = 'คุณ ' . $row->firstname_th . ' ' . $row->lastname_th;
+        $this->data['title'] = "Edit Employment";
+        
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
 
-                endforeach;
+        $data = $this->data;
 
-                $this->data['welcome'] .= $user_welcome0 . $user_welcome;
-            }
-
-            $this->load->model('employment_model');
-            $this->data['query'] = $this->employment_model->get_employment($edit_id);
-
-            $this->data['title'] = "Edit Employment";
-
-            $data = $this->data;
-
-            $this->load->view('theme/mytheme/template/header', $data);
-            $this->load->view('edit_employment', $data);
-            $this->load->view('theme/mytheme/template/footer', $data);
-        else :
-            redirect('employment');
-        endif;
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('edit_employment', $data);
+        $this->load->view('theme/mytheme/template/footer', $data);
     }
 
     public function edit_process() {

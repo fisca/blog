@@ -8,7 +8,7 @@ body{
 }
 
 select#expertise option[disabled]{
-    color: black;
+    // color: black;
 }
 
 .navbar {
