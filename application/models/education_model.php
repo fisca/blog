@@ -8,8 +8,8 @@ class Education_model extends CI_Model {
         parent::__construct();
     }
 
-    public function get_education($researcher_id) {
-        $sql = "SELECT * FROM ci_education WHERE researcher_id = '$researcher_id' ORDER BY grad_year DESC;";
+    public function get_education($researcher_key) {
+        $sql = "SELECT * FROM ci_education WHERE researcher_key = '$researcher_key' ORDER BY grad_year DESC;";
         $query = $this->db->query($sql);
         return $query->result();
     }

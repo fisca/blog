@@ -111,12 +111,14 @@ class Research extends CI_Controller {
     }
 
     public function edit_training_process() {
+        $this->check_isvalidated();
         $this->load->model('research_model');
         $this->research_model->update_training();
         redirect('research');
     }
 
     public function edit_expertise_process() {
+        $this->check_isvalidated();
         $this->load->model('research_model');
         $this->research_model->update_expertise();
         redirect('research');
@@ -124,6 +126,7 @@ class Research extends CI_Controller {
 
     public function add_research() {
         $this->check_isvalidated();
+        
     }
 
     public function delete_research($id) {

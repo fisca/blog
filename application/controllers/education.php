@@ -51,7 +51,7 @@ class Education extends CI_Controller {
         $this->data['last_time_login'] = $this->session->userdata('last_time_login');
         $this->load->model('profile_model');
         if ($this->session->userdata('level') == 10) {
-            redirect("admin", "location");
+            redirect("admin/admin", "location");
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
 
@@ -118,13 +118,9 @@ class Education extends CI_Controller {
         if (!$this->input->post('researcher_key')) {
             redirect('education');
         }
-        $this->data['add_key'] = $this->security->xss_clean($this->input->post('researcher_key'));
+        $this->data['researcher_key'] = $this->security->xss_clean($this->input->post('researcher_key'));
 
-        $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br> คุณ ';
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
-
-        $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
+        $this->user_check();
 
         $this->data['title'] = "Add Education";
         $data = $this->data;

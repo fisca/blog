@@ -46,7 +46,7 @@
             </table>
 
             <form role="form" method="post" action="<?php echo base_url(); ?>index.php/education/add_education">
-                <input type="hidden" name="researcher_id" value="<?php echo $row->researcher_id; ?>">
+                <input type="hidden" name="researcher_key" value="<?php echo $row->researcher_key; ?>">
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add</button>
             </form>
 
