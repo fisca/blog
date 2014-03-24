@@ -26,17 +26,11 @@ class Profile extends CI_Controller {
     }
 
     public function index() {
-        // If the user is validated, then this function will run
-
         $this->user_check();
-
         $this->data['query'] = $this->profile_model->get_profile($this->session->userdata('researcher_key'));
-
         $data = $this->data;
         $this->load->view('theme/mytheme/template/header', $data);
-
         $this->load->view('profile', $data);
-
         $this->load->view('theme/mytheme/template/footer', $data);
     }
 

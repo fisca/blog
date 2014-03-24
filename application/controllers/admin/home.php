@@ -20,21 +20,20 @@ class Home extends CI_Controller {
         $this->load->helper('captcha');
 
         // ======== Title ========
-        $this->data['title'] = 'Home';
+        $this->data['title'] = 'Admin: Home';
 
         $this->check_isvalidated();
     }
 
     public function index() {
-        // If the user is validated, then this function will run
-        $this->data['logout_tag'] = '<br /><a href="' . base_url() . 'index.php/home/do_logout">Logout</a>';
-
         $this->user_check();
-
+        $this->data['query'] = $this->profile_model->get_profile($this->session->userdata('researcher_key'));
+        $this->load->model('admin/home_model', 'home_model');
+        $this->data['q_list'] = $this->home_model->get_list();
         $data = $this->data;
-        $this->load->view('theme/mytheme/template/header', $data);
-        $this->load->view('home', $data);
-        $this->load->view('theme/mytheme/template/footer', $data);
+        $this->load->view('admin/template/header', $data);
+        $this->load->view('admin/home', $data);
+        $this->load->view('admin/template/footer', $data);
     }
 
     private function check_isvalidated() {
@@ -47,14 +46,12 @@ class Home extends CI_Controller {
         $this->data['recent_login'] = $this->session->userdata('recent_login');
         $this->data['last_time_login'] = $this->session->userdata('last_time_login');
         $this->load->model('profile_model');
-        if ($this->session->userdata('level') == 10) {
-            redirect("admin/home", "location");
+        if ($this->session->userdata('level') != 10) {
+            redirect("home", "location");
         } else {
             $user_data = $this->profile_model->get_user_data($this->session->userdata('researcher_key'));
-
             if (!$user_data):
                 $this->data['username'] = $this->session->userdata('username');
-
                 $this->data['researcher_key'] = $this->session->userdata('researcher_key');
             else :
                 foreach ($user_data as $row) :
@@ -67,6 +64,16 @@ class Home extends CI_Controller {
     public function do_logout() {
         $this->session->sess_destroy();
         redirect('login');
+    }
+
+    public function researcher($key) {
+        $this->user_check();
+        $this->data['query'] = $this->profile_model->get_profile($this->session->userdata('researcher_key'));
+        $this->data['q_profile'] = $this->profile_model->get_profile($key);
+        $data = $this->data;
+        $this->load->view('admin/template/header', $data);
+        $this->load->view('admin/researcher', $data);
+        $this->load->view('admin/template/footer', $data);
     }
 
 }

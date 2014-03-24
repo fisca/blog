@@ -30,18 +30,7 @@ class Login extends CI_Controller {
         // ---- Title ---- //
         $this->data['title'] = 'Login';
 
-        // ---- Form ---- //
-        
-
-        $label_att = array(
-            'class' => 'col-sm-4 control-label'
-        );
-
-
-        // ---- Sending data to views ---- //       
-
         $data = $this->data;
-        
         $this->load->view('login_view', $data);
         $this->load->view('theme/mytheme/template/footer', $data);
     }
