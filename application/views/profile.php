@@ -3,11 +3,13 @@
 
         <h2 style="text-align: center;">Profile <span class="glyphicon glyphicon-user"></span></h2>
         <h4 style="text-align: center;">(ข้อมูลประวัติส่วนตัว)</h4>
-        <p>&nbsp;</p>
 
         <?php if (!$query) : ?>
-
-            <div class="alert alert-danger">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติส่วนตัว</div>
+        <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6 alert alert-warning text-center"><strong style="color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูลประวัติส่วนตัว</strong></div>
+                <div class="col-md-3">&nbsp;</div>
+            </div>
             <form method="post" action="<?php echo base_url(); ?>index.php/profile/add_profile">
                 <div style="text-align: center;">
                     <input type="hidden" name="researcher_key" value="<?php echo $researcher_key; ?>">

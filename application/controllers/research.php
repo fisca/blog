@@ -31,6 +31,7 @@ class Research extends CI_Controller {
         $this->load->model('research_model');
         $this->data['query'] = $this->research_model->get_research($this->session->userdata('researcher_key'));
         $this->data['query_expertise'] = $this->research_model->get_expertise($this->session->userdata('researcher_key'));
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
         $data = $this->data;
         $this->load->view('theme/mytheme/template/header', $data);
         $this->load->view('research', $data);

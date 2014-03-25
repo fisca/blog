@@ -4,7 +4,11 @@
         <p>&nbsp;</p>
 
         <?php if (!$query) : ?>
-            <h4 style="text-align: center; color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูล Research</h4>
+            <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6 alert alert-warning text-center"><strong style="color: red;">ขออภัย คุณยังไม่ได้กรอกข้อมูล research data</strong></div>
+                <div class="col-md-3">&nbsp;</div>
+            </div>
             <form method="post" action="<?php echo base_url(); ?>index.php/research/add_research">
                 <div style="text-align: center;">
                     <input type="hidden" name="researcher_key" value="<?php echo $researcher_key; ?>">

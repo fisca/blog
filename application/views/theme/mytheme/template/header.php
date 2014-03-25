@@ -80,6 +80,7 @@
                             <li><a href="<?php echo base_url(); ?>index.php/education">Education</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/employment">Employment</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/research">Research</a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/home/do_logout">Logout</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

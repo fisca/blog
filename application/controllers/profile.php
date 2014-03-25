@@ -117,13 +117,11 @@ class Profile extends CI_Controller {
         if (!$this->input->post('researcher_key')) {
             redirect('profile');
         }
+
+        $this->user_check();
+        $this->data['researcher_key'] = $this->security->xss_clean($this->input->post('researcher_key'));
+
         $this->data['add_key'] = $this->security->xss_clean($this->input->post('researcher_key'));
-
-        $this->data['welcome'] = '<span style="font-size: large;">ยินดีต้อนรับ</span><br> คุณ ';
-        $user_welcome = '<br>เข้าใช้งานครั้งล่าสุด : ' . $this->session->userdata('recent_login');
-        $user_welcome .= '<br>เข้าใช้งานครั้งก่อน : ' . $this->session->userdata('last_time_login');
-
-        $this->data['welcome'] .= $this->session->userdata('username') . $user_welcome;
 
         $this->data['title'] = "Add Profile";
         $data = $this->data;
