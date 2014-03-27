@@ -79,9 +79,13 @@
                             <li><a href="<?php echo base_url(); ?>index.php/profile">Profile</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/education">Education</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/employment">Employment</a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/research">Research</a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/home/do_logout">Logout</a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/research">Research</a></li>                            
                         </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="<?php echo base_url(); ?>index.php/home/do_logout">Logout <span class="glyphicon glyphicon-log-out" style="color: red;"></span></a></li>                            
+                        </ul>
+
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>

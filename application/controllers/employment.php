@@ -116,5 +116,17 @@ class Employment extends CI_Controller {
         $this->employment_model->update_employment();
         redirect('employment');
     }
+    
+    public function add_employment(){
+        $this->user_check();
+
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
+        $this->data['title'] = 'Add Employment Position data';
+        $data = $this->data;
+        
+        $this->load->view('theme/mytheme/template/header', $data);
+        $this->load->view('add_employment', $data);
+        $this->load->view('theme/mytheme/template/footer', $data);
+    }
 
 }

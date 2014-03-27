@@ -127,7 +127,18 @@ class Research extends CI_Controller {
 
     public function add_research() {
         $this->check_isvalidated();
+
+        $this->user_check();
+
+        $this->data['researcher_key'] = $this->session->userdata('researcher_key');
         
+        $this->data['title'] = 'Add Research data';
+
+        $data = $this->data;
+
+        $this->load->view('theme/mytheme/template/header', $data);
+        // $this->load->view('add_research', $data);
+        $this->load->view('theme/mytheme/template/footer', $data);
     }
 
     public function delete_research($id) {

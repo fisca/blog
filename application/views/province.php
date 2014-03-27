@@ -102,7 +102,6 @@ $province_en = array("Amnat Charoen", "Ang Thong", "Bangkok", "Buriram", "Chacho
 ?>
 
 <?php $province = '
-  <select name="province_th">
   <option value="" selected>--------- เลือกจังหวัด ---------</option>
   <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
   <option value="กระบี่">กระบี่ </option>
@@ -181,7 +180,6 @@ $province_en = array("Amnat Charoen", "Ang Thong", "Bangkok", "Buriram", "Chacho
   <option value="อุทัยธานี">อุทัยธานี </option>
   <option value="อุบลราชธานี">อุบลราชธานี</option>
   <option value="อ่างทอง">อ่างทอง </option>
-  <option value="อื่นๆ">อื่นๆ</option>
-  </select>
+  <option value="อื่นๆ">อื่นๆ</option>  
  ';
 ?>
