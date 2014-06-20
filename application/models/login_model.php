@@ -39,9 +39,9 @@ class Login_model extends CI_Model {
         $query = $this->db->get('ci_user');
         // Let's check if there are any results        
         if ($query->num_rows == 1) {
-
             $row = $query->row();
-
+            
+            date_default_timezone_set("Asia/Bangkok");
             $data_update = array(
                 'recent_login' => date("Y-m-d H:i:s"),
                 'last_time_login' => $row->recent_login
